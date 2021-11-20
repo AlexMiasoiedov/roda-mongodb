@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 require "roda"
+require "./learnings/models/video"
 
-module Microlearnings
+module Learnings
   class Video < Roda
     route do |r|
       r.is do
-        ['1', '2', '3'].join(', ')
+        Video.all.to_json
       end
 
       r.is Integer do |id|
-        id.to_s
+        video = Video.find(id)
+        video.attributes.to_json
       end
     end
   end

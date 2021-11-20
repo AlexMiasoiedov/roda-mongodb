@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    ports:
+      - "9292:9292"
+    networks:
+      - backend
+    depends_on:
+      monga:
+        condition: service_healthy
+    environment:
+      RACK_ENV: development
+      MONGO_HOST: monga
+      MONGO_PORT: 27017
+      MONGO_DB: development
+
+  monga:
+    image: mongo
+    restart: always
+    networks:
+      - backend
+    healthcheck:
+      test: "exit 0"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+networks:
+  backend:

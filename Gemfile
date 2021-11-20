@@ -8,4 +8,5 @@ ruby "3.0.2"
 
 gem "roda"
 gem "puma"
-
+gem 'mongoid', '~> 7.0'
+gem "dotenv"

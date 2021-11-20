@@ -1,5 +1,11 @@
 require "roda"
-require "./microlearning"
+require "./learning"
+
+require 'mongoid'
+Mongoid.load!(File.join(File.dirname(__FILE__), 'config', 'mongoid.yml'))
+
+require 'dotenv'
+Dotenv.load
 
 class App < Roda
   route do |r|
@@ -7,7 +13,6 @@ class App < Roda
       "welcome!!!"
     end
 
-    r.run Microlearning
+    r.run Learning
   end
 end
-
